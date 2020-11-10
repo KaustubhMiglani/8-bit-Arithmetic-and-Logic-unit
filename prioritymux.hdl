@@ -1,0 +1,38 @@
+/* 2-bit 4-to-1 priority multiplexer*/
+CHIP prioritymux{
+     IN r0,r1,r2,r3,x0[2],x1[2],x2[2],x3[2];
+     OUT y1,y0;
+     PARTS:
+     Not(in=r0,out=notr0);
+     Not(in=r1,out=notr1);
+     Not(in=r2,out=notr2);
+     And(a=notr0,b=notr1,out=s1);
+     And(a=notr0,b=notr2,out=s);
+     And(a=notr0,b=r1,out=p);
+     Or(a=s,b=p,out=s0);
+     Not(in=s1,out=nots1);
+     Not(in=s0,out=nots0);
+     And(a=nots1,b=nots0,out=a1);
+     And(a=a1,b=x0[0],out=y00);
+     And(a=nots1,b=s0,out=a2);
+     And(a=a2,b=x1[0],out=y01);
+     And(a=s1,b=nots0,out=a3);
+     And(a=a3,b=x2[0],out=y02);
+     And(a=s1,b=s0,out=a4);
+     And(a=a4,b=x3[0],out=y03);
+     Or(a=y00,b=y01,out=c1);
+     Or(a=c1,b=y02,out=c2);
+     Or(a=c2,b=y03,out=y0);
+     And(a=nots1,b=nots0,out=b1);
+     And(a=b1,b=x0[1],out=y10);
+     And(a=nots1,b=s0,out=b2);
+     And(a=b2,b=x1[1],out=y11);
+     And(a=s1,b=nots0,out=b3);
+     And(a=b3,b=x2[1],out=y12);
+     And(a=s1,b=s0,out=b4);
+     And(a=b4,b=x3[1],out=y13);
+     Or(a=y10,b=y11,out=d1);
+     Or(a=d1,b=y12,out=d2);
+     Or(a=d2,b=y13,out=y1);
+}
+     

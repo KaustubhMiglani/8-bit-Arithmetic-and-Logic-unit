@@ -1,0 +1,33 @@
+/* 2 to 1 mux for 8-bit data*/
+
+CHIP bit82to1mux
+{IN X[8],Y[8],S0;
+ //if s0=1 outputs Y else outputs X
+ OUT Z[8];
+ PARTS:
+ Not(in=S0,out=notS0);
+ And(a=notS0,b=X[7],out=part11);
+ And(a=notS0,b=X[6],out=part21);
+ And(a=notS0,b=X[5],out=part31);
+ And(a=notS0,b=X[4],out=part41);
+ And(a=notS0,b=X[3],out=part51);
+ And(a=notS0,b=X[2],out=part61);
+ And(a=notS0,b=X[1],out=part71);
+ And(a=notS0,b=X[0],out=part81);
+ And(a=S0,b=Y[7],out=part12);
+ And(a=S0,b=Y[6],out=part22);
+ And(a=S0,b=Y[5],out=part32);
+ And(a=S0,b=Y[4],out=part42);
+ And(a=S0,b=Y[3],out=part52);
+ And(a=S0,b=Y[2],out=part62);
+ And(a=S0,b=Y[1],out=part72);
+ And(a=S0,b=Y[0],out=part82);
+ Or(a=part11,b=part12,out=Z[7]);
+ Or(a=part21,b=part22,out=Z[6]);
+ Or(a=part31,b=part32,out=Z[5]);
+ Or(a=part41,b=part42,out=Z[4]);
+ Or(a=part51,b=part52,out=Z[3]);
+ Or(a=part61,b=part62,out=Z[2]);
+ Or(a=part71,b=part72,out=Z[1]);
+ Or(a=part81,b=part82,out=Z[0]);
+}

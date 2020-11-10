@@ -1,0 +1,17 @@
+//takes a single bit of two numbers and gives the sum and carry*/
+
+CHIP Bit1Add{
+  IN num[2],carry;
+  OUT s,c;
+
+  PARTS:
+  And(a=num[1],b=num[0],out=temp1);
+  And(a=num[1],b=carry,out=temp2);
+  And(a=num[0],b=carry,out=temp3);
+  Or(a=temp1,b=temp2,out=temp4);
+  Or(a=temp3,b=temp4,out=c);
+  Xor(a=num[0],b=num[1],out=a);
+  Xor(a=a,b=carry,out=s);
+
+
+}

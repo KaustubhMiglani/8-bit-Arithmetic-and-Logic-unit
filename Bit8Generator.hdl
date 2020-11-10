@@ -1,0 +1,16 @@
+CHIP Bit8Generator{
+  IN x1,x2,x0,x3,x5,x4,x6,x7;
+  OUT Pg;
+
+    PARTS:
+    Xor(a=x1,b=x2,out=a1);
+    Xor(a=x3,b=a1,out=a2);
+    Xor(a=x4,b=a2,out=a3);
+    Xor(a=x5,b=a3,out=a4);
+    Xor(a=x5,b=a4,out=a5);
+    Xor(a=x6,b=a5,out=a6);
+    Xor(a=x7,b=a6,out=a7);
+    Xor(a=x0,b=a7,out=Pg);
+
+
+  }

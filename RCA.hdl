@@ -1,0 +1,55 @@
+/*ripple carry addder for 16-bit data*/
+
+CHIP RCA{
+  IN num1[16],num2[16],sign;
+  OUT ans[16],unsignedoverflow,signedoverflow;
+
+  PARTS:
+  Xor(a=sign,b=num2[0],out=newnum20);
+  Xor(a=sign,b=num2[1],out=newnum21);
+  Xor(a=sign,b=num2[2],out=newnum22);
+  Xor(a=sign,b=num2[3],out=newnum23);
+  Xor(a=sign,b=num2[4],out=newnum24);
+  Xor(a=sign,b=num2[5],out=newnum25);
+  Xor(a=sign,b=num2[6],out=newnum26);
+  Xor(a=sign,b=num2[7],out=newnum27);
+  Xor(a=sign,b=num2[8],out=newnum28);
+  Xor(a=sign,b=num2[9],out=newnum29);
+  Xor(a=sign,b=num2[10],out=newnum210);
+  Xor(a=sign,b=num2[11],out=newnum211);
+  Xor(a=sign,b=num2[12],out=newnum212);
+  Xor(a=sign,b=num2[13],out=newnum213);
+  Xor(a=sign,b=num2[14],out=newnum214);
+  Xor(a=sign,b=num2[15],out=newnum215);
+//bit-wise addition
+  Bit1Add(num[0]=num1[0],num[1]=newnum20,carry=sign,c=carry0,s=ans[0]);
+  Bit1Add(num[0]=num1[1],num[1]=newnum21,carry=carry0,c=carry1,s=ans[1]);
+  Bit1Add(num[0]=num1[2],num[1]=newnum22,carry=carry1,c=carry2,s=ans[2]);
+  Bit1Add(num[0]=num1[3],num[1]=newnum23,carry=carry2,c=carry3,s=ans[3]);
+  Bit1Add(num[0]=num1[4],num[1]=newnum24,carry=carry3,c=carry4,s=ans[4]);
+  Bit1Add(num[0]=num1[5],num[1]=newnum25,carry=carry4,c=carry5,s=ans[5]);
+  Bit1Add(num[0]=num1[6],num[1]=newnum26,carry=carry5,c=carry6,s=ans[6]);
+  Bit1Add(num[0]=num1[7],num[1]=newnum27,carry=carry6,c=carry7,s=ans[7]);
+  Bit1Add(num[0]=num1[8],num[1]=newnum28,carry=carry7,c=carry8,s=ans[8]);
+  Bit1Add(num[0]=num1[9],num[1]=newnum29,carry=carry8,c=carry9,s=ans[9]);
+  Bit1Add(num[0]=num1[10],num[1]=newnum210,carry=carry9,c=carry10,s=ans[10]);
+  Bit1Add(num[0]=num1[11],num[1]=newnum211,carry=carry10,c=carry11,s=ans[11]);
+  Bit1Add(num[0]=num1[12],num[1]=newnum212,carry=carry11,c=carry12,s=ans[12]);
+  Bit1Add(num[0]=num1[13],num[1]=newnum213,carry=carry12,c=carry13,s=ans[13]);
+  Bit1Add(num[0]=num1[14],num[1]=newnum214,carry=carry13,c=carry14,s=ans[14]);
+
+//for overflow
+  And(a=num1[15],b=newnum215,out=temp1);
+  Not(in=num1[15],out=newnum1);
+  Not(in=newnum215,out=notnewnum215);
+  And(a=newnum1,b=notnewnum215,out=temp2);
+  Bit1Add(num[0]=num1[15],num[1]=newnum215,carry=carry14,c=unsignedoverflow,s=ans[15]);
+  Bit1Add(num[0]=num1[15],num[1]=newnum215,carry=carry14,c=k,s=temp3);
+  Not(in=temp3,out=nottemp3);
+  And(a=temp1,b=nottemp3,out=temp4);
+  And(a=temp2,b=temp3,out=temp5);
+  Or(a=temp4,b=temp5,out=signedoverflow);
+
+
+
+}

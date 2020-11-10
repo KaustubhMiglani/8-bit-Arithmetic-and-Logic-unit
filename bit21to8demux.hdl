@@ -1,0 +1,39 @@
+/*1 to 8 demux for 2-bit data*/
+
+CHIP bit21to8demux{
+  IN X1,X0,S2,S1,S0;
+  OUT Y01,Y00,Y11,Y10,Y21,Y20,Y31,Y30,Y41,Y40,Y51,Y50,Y61,Y60,Y71,Y70;
+//output depends on S2,S1 and S0
+  PARTS:
+  Not(in=S0,out=notS0);
+  Not(in=S1,out=notS1);
+  Not(in=S2,out=notS2);
+  And(a=notS2,b=notS1,out=part01);
+  And(a=part01,b=notS0,out=part0);
+  And(a=part01,b=S0,out=part1);
+  And(a=notS2,b=S1,out=part11);
+  And(a=part11,b=notS0,out=part2);
+  And(a=part11,b=S0,out=part3);
+  And(a=S2,b=notS1,out=part21);
+  And(a=part21,b=notS0,out=part4);
+  And(a=part21,b=S0,out=part5);
+  And(a=S2,b=S1,out=part31);
+  And(a=part31,b=notS0,out=part6);
+  And(a=part31,b=S0,out=part7);
+  And(a=part0,b=X0,out=Y00);
+  And(a=part0,b=X1,out=Y01);
+  And(a=part1,b=X0,out=Y10);
+  And(a=part1,b=X1,out=Y11);
+  And(a=part2,b=X0,out=Y20);
+  And(a=part2,b=X1,out=Y21);
+  And(a=part3,b=X0,out=Y30);
+  And(a=part3,b=X1,out=Y31);
+  And(a=part4,b=X0,out=Y40);
+  And(a=part4,b=X1,out=Y41);
+  And(a=part5,b=X0,out=Y50);
+  And(a=part5,b=X1,out=Y51);
+  And(a=part6,b=X0,out=Y60);
+  And(a=part6,b=X1,out=Y61);
+  And(a=part7,b=X0,out=Y70);
+  And(a=part7,b=X1,out=Y71);
+}

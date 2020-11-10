@@ -1,0 +1,51 @@
+/* signed multiplication*/
+
+CHIP IMUL{
+     IN x[8],y[8];
+     OUT z[16],of;
+     PARTS:
+     PPGenerator1(num1=x,num2=y,PartProduct0=dum1,PartProduct1=dum2,PartProduct2=dum3,PartProduct3=dum4,PartProduct4=dum5,PartProduct5=dum6,PartProduct6=dum7,PartProduct7=dum8,PartProduct0=pp0,PartProduct1=pp1,PartProduct2=pp2,PartProduct3=pp3,PartProduct4=pp4,PartProduct5=pp5,PartProduct6=pp6,PartProduct7=temp);
+/*for pp7*/
+     claHigh(x=false,y=temp,sign=true,type=true,z=pp7);
+/* adding all pps*/
+     CSAadder(X=pp0,Y=pp1,carryin=pp2,SUM=s00,carry=c00);
+     CSAadder(X=pp3,Y=pp4,carryin=pp5,SUM=s01,carry=c01);
+     CSAadder(X=c00,Y=s00,carryin=c01,SUM=s10,carry=c10);
+     CSAadder(X=s01,Y=pp6,carryin=pp7,SUM=s11,carry=c11);
+     CSAadder(X=c10,Y=s10,carryin=c11,SUM=s20,carry=c20);
+     CSAadder(X=c20,Y=s20,carryin=s11,SUM=s30,carry=c30);
+     claHigh(x=s30,y=c30,sign=false,type=true,z=z,z[7]=q7,z[8]=q8,z[9]=q9,z[10]=q10,z[11]=q11,z[12]=q12,z[13]=q13,z[14]=q14,z[15]=q15);
+
+/* for overflow*/
+     Xor(a=x[7],b=y[7],out=dum,out=a0);
+     Not(in=a0,out=nota0);
+     Not(in=q7,out=notz7);
+     Not(in=q8,out=notz8);
+     Not(in=q9,out=notz9);
+     Not(in=q10,out=notz10);
+     Not(in=q11,out=notz11);
+     Not(in=q12,out=notz12);
+     Not(in=q13,out=notz13);
+     Not(in=q14,out=notz14);
+     Not(in=q15,out=notz15);
+     Or(a=q7,b=q8,out=a1);
+     Or(a=a1,b=q9,out=a2);
+     Or(a=a2,b=q10,out=a3);
+     Or(a=a3,b=q11,out=a4);
+     Or(a=a4,b=q12,out=a5);
+     Or(a=a5,b=q13,out=a6);
+     Or(a=a6,b=q14,out=a7);
+     Or(a=a7,b=q15,out=a8);
+     Or(a=notz7,b=notz8,out=a9);
+     Or(a=a9,b=notz9,out=a10);
+     Or(a=a10,b=notz10,out=a11);
+     Or(a=a11,b=notz11,out=a12);
+     Or(a=a12,b=notz12,out=a13);
+     Or(a=a13,b=notz13,out=a14);
+     Or(a=a14,b=notz14,out=a15);
+     Or(a=a15,b=notz15,out=a16);
+     And(a=a0,b=a16,out=a17);
+     And(a=nota0,b=a8,out=a18);
+     Or(a=a18,b=a17,out=of);
+
+}

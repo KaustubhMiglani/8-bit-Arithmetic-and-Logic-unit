@@ -1,0 +1,33 @@
+/*ALU containing all function combined together for output*/
+//first calcualte all answers and then use mux to get desired output
+CHIP ALU{
+  IN X[8],Y[8],US,opcode[3];
+  OUT Z[8],OF,EQ;
+
+  PARTS:
+  And8bit(X=X,Y=Y,Z=ans1);
+  Or8bit(X=X,Y=Y,Z=ans2);
+  Xor8bit(X=X,Y=Y,Z=ans3);
+//addition of two inputs
+  bit16CLAadderSubtractorunsigned(X=X,Y=Y,AorS=false,SUM=ans41,Overflow=overflow41);
+  bit16CLAadderSubtractorsigned(X=X,Y=Y,AorS=false,SUM=ans42,Overflow=overflow42);
+  bit82to1mux(X=ans41,Y=ans42,S0=US,Z=ans4);
+//subtraction of two inputs
+  bit16CLAadderSubtractorunsigned(X=X,Y=Y,AorS=true,SUM=ans51,Overflow=overflow51);
+  bit16CLAadderSubtractorsigned(X=X,Y=Y,AorS=true,SUM=ans52,Overflow=overflow52);
+  bit82to1mux(X=ans51,Y=ans52,S0=US,Z=ans5);
+
+  bit16unsignedmultiplier(num1=X,num2=Y,ans[0..7]=ans6,overflow=overflow6);
+  IMUL(x=X,y=Y,z[0..7]=ans7,of=overflow7);
+  comparator(x=X,y=Y,z=EQ);
+
+  Or8Way(in[0]=overflow41,in[1]=overflow42,in[2]=false,in[3]=overflow52,in[4]=overflow6,in[5]=false,in[6]=false,in[7]=overflow7,out=OF);
+
+  bit84to1mux(X=false,Y=ans1,P=ans2,Q=ans3,S1=opcode[1],S0=opcode[0],Z=ANS1);
+  bit84to1mux(X=ans4,Y=ans5,P=ans6,Q=ans7,S1=opcode[1],S0=opcode[0],Z=ANS2);
+  bit82to1mux(X=ANS1,Y=ANS2,S0=opcode[2],Z=Z);
+
+
+
+
+}

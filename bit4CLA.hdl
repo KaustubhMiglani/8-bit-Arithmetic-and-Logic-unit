@@ -1,0 +1,43 @@
+/*Without higher level propogate and generate terms*/
+CHIP bit4CLA{
+  IN X[4],Y[4],C0;
+  OUT SUM[4],C4,LastCarry;
+  PARTS:
+  propogateterms(X=X,Y=Y,P[0]=P0,P[1]=P1,P[2]=P2,P[3]=P3);
+  generateterms(X=X,Y=Y,G[0]=G0,G[1]=G1,G[2]=G2,G[3]=G3);
+  And(a=P0,b=C0,out=part1c1);
+  Or(a=part1c1,b=G0,out=C1);
+  And(a=P1,b=P0,out=part11c2);
+  And(a=part11c2,b=C0,out=part1c2);
+  And(a=P1,b=G0,out=part2c2);
+  Or(a=part1c2,b=part2c2,out=partc2);
+  Or(a=partc2,b=G1,out=C2);
+  And(a=P2,b=P1,out=d);
+  And(a=d,b=P0,out=d1);
+  And(a=d1,b=C0,out=part1c3);
+  And(a=P2,b=P1,out=o);
+  And(a=o,b=G0,out=part2c3);
+  And(a=P2,b=G1,out=part3c3);
+  Or(a=part1c3,b=part2c3,out=m);
+  Or(a=m,b=part3c3,out=m1);
+  Or(a=m1,b=G2,out=C3,out=LastCarry);
+  And(a=P3,b=P2,out=q);
+  And(a=q,b=P1,out=q1);
+  And(a=q1,b=P0,out=q2);
+  And(a=q2,b=C0,out=part1c4);
+  And(a=P3,b=P2,out=r);
+  And(a=r,b=P1,out=r1);
+  And(a=r1,b=G0,out=part2c4);
+  And(a=P3,b=P2,out=v);
+  And(a=v,b=G1,out=part3c4);
+  And(a=P3,b=G2,out=part4c4);
+  Or(a=part1c4,b=part2c4,out=l1);
+  Or(a=l1,b=part3c4,out=l2);
+  Or(a=l2,b=part4c4,out=l3);
+  Or(a=l3,b=G3,out=C4);
+  Xor(a=P0,b=C0,out=SUM[0]);
+  Xor(a=P1,b=C1,out=SUM[1]);
+  Xor(a=P2,b=C2,out=SUM[2]);
+  Xor(a=P3,b=C3,out=SUM[3]);
+
+}

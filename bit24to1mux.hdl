@@ -1,0 +1,32 @@
+/*4 to 1 mux for 2-bit data*/
+
+CHIP bit24to1mux{
+  IN X01,X00,X11,X10,X21,X20,X31,X30,S1,S0;
+ //Y1 and Y0 depends on S1 and S0
+  OUT Y1,Y0;
+  PARTS:
+  Not(in=S0,out=notS0);
+  Not(in=S1,out=notS1);
+  And(a=notS1,b=notS0,out=part11);
+  And(a=part11,b=X00,out=part1);
+  And(a=notS1,b=S0,out=part21);
+  And(a=part21,b=X10,out=part2);
+  And(a=S1,b=notS0,out=part31);
+  And(a=part31,b=X20,out=part3);
+  And(a=S1,b=S0,out=part41);
+  And(a=part41,b=X30,out=part4);
+  Or(a=part1,b=part2,out=partial1);
+  Or(a=part3,b=part4,out=partial2);
+  Or(a=partial1,b=partial2,out=Y0);
+  And(a=notS1,b=notS0,out=part12);
+  And(a=part12,b=X01,out=parti1);
+  And(a=notS1,b=S0,out=part22);
+  And(a=part22,b=X11,out=parti2);
+  And(a=S1,b=notS0,out=part32);
+  And(a=part32,b=X21,out=parti3);
+  And(a=S1,b=S0,out=part42);
+  And(a=part42,b=X31,out=parti4);
+  Or(a=parti1,b=parti2,out=partiali1);
+  Or(a=parti3,b=parti4,out=partiali2);
+  Or(a=partiali1,b=partiali2,out=Y1);
+}

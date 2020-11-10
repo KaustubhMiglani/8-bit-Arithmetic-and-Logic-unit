@@ -1,0 +1,23 @@
+/* 8-bit comparator*/
+CHIP comparator{
+   IN x[8],y[8];
+   OUT z;
+   PARTS:
+   Xor(a=x[0],b=y[0],out=z0);
+   Xor(a=x[1],b=y[1],out=z1);
+   Xor(a=x[2],b=y[2],out=z2);
+   Xor(a=x[3],b=y[3],out=z3);
+   Xor(a=x[4],b=y[4],out=z4);
+   Xor(a=x[5],b=y[5],out=z5);
+   Xor(a=x[6],b=y[6],out=z6);
+   Xor(a=x[7],b=y[7],out=z7);
+   Or(a=z0,b=z1,out=c0);
+   Or(a=c0,b=z2,out=c1);
+   Or(a=c1,b=z3,out=c2);
+   Or(a=c2,b=z4,out=c3);
+   Or(a=c3,b=z5,out=c4);
+   Or(a=c4,b=z6,out=c5);
+   Or(a=c5,b=z7,out=c6);
+   Not(in=c6,out=z);
+}
+

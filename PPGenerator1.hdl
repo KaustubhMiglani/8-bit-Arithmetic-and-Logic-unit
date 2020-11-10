@@ -1,0 +1,25 @@
+/* pp generators for signed multiplication which also takes care of the sign of remaining bits */
+
+CHIP PPGenerator1{
+  IN num1[8],num2[8];
+  OUT PartProduct0[16],PartProduct1[16],PartProduct2[16],PartProduct3[16],PartProduct4[16],PartProduct5[16],PartProduct5[16],PartProduct6[16],PartProduct7[16];
+
+  PARTS:
+  PP(num1=num1,num2=num2[0],ans=PartProduct0[0..7],ans[7]=yo);
+  Or(a=false,b=yo,out=PartProduct0[8],out=PartProduct0[9],out=PartProduct0[10],out=PartProduct0[11],out=PartProduct0[12],out=PartProduct0[13],out=PartProduct0[14],out=PartProduct0[15]);
+  PP(num1=num1,num2=num2[1],ans=PartProduct1[1..8],ans[7]=op);
+  Or(a=false,b=op,out=PartProduct1[9],out=PartProduct1[10],out=PartProduct1[11],out=PartProduct1[12],out=PartProduct1[13],out=PartProduct1[14],out=PartProduct1[15]);
+  PP(num1=num1,num2=num2[2],ans=PartProduct2[2..9],ans[7]=opi);
+  Or(a=false,b=opi,out=PartProduct2[10],out=PartProduct2[11],out=PartProduct2[12],out=PartProduct2[13],out=PartProduct2[14],out=PartProduct2[15]);
+  PP(num1=num1,num2=num2[3],ans=PartProduct3[3..10],ans[7]=dummy);
+  Or(a=false,b=dummy,out=PartProduct3[11],out=PartProduct3[12],out=PartProduct3[13],out=PartProduct3[14],out=PartProduct3[15]);
+  PP(num1=num1,num2=num2[4],ans=PartProduct4[4..11],ans[7]=dummy1);
+  Or(a=false,b=dummy1,out=PartProduct4[12],out=PartProduct4[13],out=PartProduct4[14],out=PartProduct4[15]);
+  PP(num1=num1,num2=num2[5],ans=PartProduct5[5..12],ans[7]=dummy2);
+  Or(a=false,b=dummy2,out=PartProduct5[13],out=PartProduct5[14],out=PartProduct5[15]);
+  PP(num1=num1,num2=num2[6],ans=PartProduct6[6..13],ans[7]=dummy3);
+  Or(a=false,b=dummy3,out=PartProduct6[14],out=PartProduct6[15]);
+  PP(num1=num1,num2=num2[7],ans=PartProduct7[7..14],ans[7]=dummy4);
+  Or(a=false,b=dummy4,out=PartProduct7[15]);
+
+}

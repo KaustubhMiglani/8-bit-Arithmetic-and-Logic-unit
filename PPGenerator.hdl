@@ -1,0 +1,20 @@
+/*Generates the 8 partial products*/
+/*Used in Multiplication*/
+CHIP PPGenerator{
+  IN num1[8],num2[8];
+  OUT PartProduct0[16],PartProduct1[16],PartProduct2[16],PartProduct3[16],PartProduct4[16],PartProduct5[16],PartProduct5[16],PartProduct6[16],PartProduct7[16];
+
+  PARTS:
+  PP(num1=num1,num2=num2[0],ans=PartProduct0[0..7]);
+  PP(num1=num1,num2=num2[1],ans=PartProduct1[1..8]);
+  PP(num1=num1,num2=num2[2],ans=PartProduct2[2..9]);
+  PP(num1=num1,num2=num2[3],ans=PartProduct3[3..10]);
+  PP(num1=num1,num2=num2[4],ans=PartProduct4[4..11]);
+  PP(num1=num1,num2=num2[5],ans=PartProduct5[5..12]);
+  PP(num1=num1,num2=num2[6],ans=PartProduct6[6..13]);
+  PP(num1=num1,num2=num2[7],ans=PartProduct7[7..14]);
+
+
+
+
+}

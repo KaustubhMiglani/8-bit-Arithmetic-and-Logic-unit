@@ -1,0 +1,22 @@
+/*Code for 8 bit unsigned multiplier*/
+/*Uses carry save addition*/
+CHIP bit16unsignedmultiplier
+  {
+   IN num1[8],num2[8];
+   OUT ans[16],overflow;
+
+   PARTS:
+   PPGenerator(num1=num1,num2=num2,PartProduct0=PP0,PartProduct1=PP1,PartProduct2=PP2,PartProduct3=PP3,PartProduct4=PP4,PartProduct5=PP5,PartProduct6=PP6,PartProduct7=PP7);
+   CSAadder(X=PP0,Y=PP1,carryin=PP2,SUM=temp15,carry=temp16);
+   CSAadder(X=PP3,Y=temp16,carryin=temp15,SUM=temp2,carry=temp3);
+   CSAadder(X=PP4,Y=temp2,carryin=temp3,SUM=temp4,carry=temp5);
+   CSAadder(X=PP5,Y=temp4,carryin=temp5,SUM=temp6,carry=temp7);
+   CSAadder(X=PP6,Y=temp6,carryin=temp7,SUM=temp8,carry=temp9);
+   CSAadder(X=PP7,Y=temp8,carryin=temp9,SUM=temp10,carry=temp11);
+
+   claHigh(x=temp10,y=temp11,sign=false,type=false,z[8..15]=tempans,z[0..7]=tempans2,of=temmp);
+   claHigh(x=temp10,y=temp11,sign=false,type=false,z=ans,of=temmp2);
+   Or8Way(in=tempans,out=overflow);
+
+
+  }

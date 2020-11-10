@@ -1,0 +1,17 @@
+/*Takes bitwise and of all the bits of num1 with num2*/
+CHIP PP{
+  IN num1[8],num2;
+  OUT ans[8];
+
+  PARTS:
+  And(a=num1[0],b=num2,out=ans[0]);
+  And(a=num1[1],b=num2,out=ans[1]);
+  And(a=num1[2],b=num2,out=ans[2]);
+  And(a=num1[3],b=num2,out=ans[3]);
+  And(a=num1[4],b=num2,out=ans[4]);
+  And(a=num1[5],b=num2,out=ans[5]);
+  And(a=num1[6],b=num2,out=ans[6]);
+  And(a=num1[7],b=num2,out=ans[7]);
+
+
+}

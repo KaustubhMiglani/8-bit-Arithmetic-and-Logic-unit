@@ -1,0 +1,128 @@
+/* for converting 3-16bit datas into 2-16bit datas by adding them*/
+CHIP CSAadder{
+   IN X[16],Y[16],carryin[16];
+   OUT SUM[16],carry[16];
+   PARTS:
+   Xor(a=X[0],b=Y[0],out=xor1);
+   Xor(a=xor1,b=carryin[0],out=SUM[0]);
+
+   And(a=X[0],b=Y[0],out=and1);
+   And(a=X[0],b=carryin[0],out=and2);
+   And(a=Y[0],b=carryin[0],out=and3);
+   Or(a=and1,b=and2,out=or1);
+   Or(a=or1,b=and3,out=carry[1]);
+   Xor(a=X[1],b=Y[1],out=xor2);
+   Xor(a=xor2,b=carryin[1],out=SUM[1]);
+
+   And(a=X[1],b=Y[1],out=and4);
+   And(a=X[1],b=carryin[1],out=and5);
+   And(a=Y[1],b=carryin[1],out=and6);
+   Or(a=and4,b=and5,out=or2);
+   Or(a=or2,b=and6,out=carry[2]);
+   Xor(a=X[2],b=Y[2],out=xor3);
+   Xor(a=xor3,b=carryin[2],out=SUM[2]);
+
+   And(a=X[2],b=Y[2],out=and7);
+   And(a=X[2],b=carryin[2],out=and8);
+   And(a=Y[2],b=carryin[2],out=and9);
+   Or(a=and7,b=and8,out=or3);
+   Or(a=or3,b=and9,out=carry[3])
+   Xor(a=X[3],b=Y[3],out=xor4);
+   Xor(a=xor4,b=carryin[3],out=SUM[3]);
+
+   And(a=X[3],b=Y[3],out=and10);
+   And(a=X[3],b=carryin[3],out=and11);
+   And(a=Y[3],b=carryin[3],out=and12);
+   Or(a=and10,b=and11,out=or4);
+   Or(a=or4,b=and12,out=carry[4]);
+   Xor(a=X[4],b=Y[4],out=xor5);
+   Xor(a=xor5,b=carryin[4],out=SUM[4]);
+
+   And(a=X[4],b=Y[4],out=and13);
+   And(a=X[4],b=carryin[4],out=and14);
+   And(a=Y[4],b=carryin[4],out=and15);
+   Or(a=and13,b=and14,out=or5);
+   Or(a=or5,b=and15,out=carry[5]);
+   Xor(a=X[5],b=Y[5],out=xor6);
+   Xor(a=xor6,b=carryin[5],out=SUM[5]);
+
+   And(a=X[5],b=Y[5],out=and16);
+   And(a=X[5],b=carryin[5],out=and17);
+   And(a=Y[5],b=carryin[5],out=and18);
+   Or(a=and16,b=and17,out=or6);
+   Or(a=or6,b=and18,out=carry[6]);
+   Xor(a=X[6],b=Y[6],out=xor7);
+   Xor(a=xor7,b=carryin[6],out=SUM[6]);
+
+   And(a=X[6],b=Y[6],out=and19);
+   And(a=X[6],b=carryin[6],out=and20);
+   And(a=Y[6],b=carryin[6],out=and21);
+   Or(a=and19,b=and20,out=or7);
+   Or(a=or7,b=and21,out=carry[7]);
+   Xor(a=X[7],b=Y[7],out=xor8);
+   Xor(a=xor8,b=carryin[7],out=SUM[7]);
+
+   And(a=X[7],b=Y[7],out=and22);
+   And(a=X[7],b=carryin[7],out=and23);
+   And(a=Y[7],b=carryin[7],out=and24);
+   Or(a=and22,b=and23,out=or8);
+   Or(a=or8,b=and24,out=carry[8]);
+   Xor(a=X[8],b=Y[8],out=xor9);
+   Xor(a=xor9,b=carryin[8],out=SUM[8]);
+
+   And(a=X[8],b=Y[8],out=and25);
+   And(a=X[8],b=carryin[8],out=and26);
+   And(a=Y[8],b=carryin[8],out=and27);
+   Or(a=and25,b=and26,out=or9);
+   Or(a=or9,b=and27,out=carry[9]);
+   Xor(a=X[9],b=Y[9],out=xor10);
+   Xor(a=xor10,b=carryin[9],out=SUM[9]);
+
+   And(a=X[9],b=Y[9],out=and28);
+   And(a=X[9],b=carryin[9],out=and29);
+   And(a=Y[9],b=carryin[9],out=and30);
+   Or(a=and28,b=and29,out=or10);
+   Or(a=or10,b=and30,out=carry[10]);
+   Xor(a=X[10],b=Y[10],out=xor11);
+   Xor(a=xor11,b=carryin[10],out=SUM[10]);
+
+   And(a=X[10],b=Y[10],out=and31);
+   And(a=X[10],b=carryin[10],out=and32);
+   And(a=Y[10],b=carryin[10],out=and33);
+   Or(a=and31,b=and32,out=or11);
+   Or(a=or11,b=and33,out=carry[11]);
+   Xor(a=X[11],b=Y[11],out=xor12);
+   Xor(a=xor12,b=carryin[11],out=SUM[11]);
+
+   And(a=X[11],b=Y[11],out=and34);
+   And(a=X[11],b=carryin[11],out=and35);
+   And(a=Y[11],b=carryin[11],out=and36);
+   Or(a=and34,b=and35,out=or12);
+   Or(a=or12,b=and36,out=carry[12]);
+   Xor(a=X[12],b=Y[12],out=xor13);
+   Xor(a=xor13,b=carryin[12],out=SUM[12]);
+
+   And(a=X[12],b=Y[12],out=and37);
+   And(a=X[12],b=carryin[12],out=and38);
+   And(a=Y[12],b=carryin[12],out=and39);
+   Or(a=and37,b=and38,out=or13);
+   Or(a=or13,b=and39,out=carry[13]);
+   Xor(a=X[13],b=Y[13],out=xor14);
+   Xor(a=xor14,b=carryin[13],out=SUM[13]);
+
+   And(a=X[13],b=Y[13],out=and40);
+   And(a=X[13],b=carryin[13],out=and41);
+   And(a=Y[13],b=carryin[13],out=and42);
+   Or(a=and40,b=and41,out=or14);
+   Or(a=or14,b=and42,out=carry[14]);
+   Xor(a=X[14],b=Y[14],out=xor15);
+   Xor(a=xor15,b=carryin[14],out=SUM[14]);
+
+   And(a=X[14],b=Y[14],out=and43);
+   And(a=X[14],b=carryin[14],out=and44);
+   And(a=Y[14],b=carryin[14],out=and45);
+   Or(a=and43,b=and44,out=or15);
+   Or(a=or15,b=and45,out=carry[15]);
+   Xor(a=X[15],b=Y[15],out=xor16);
+   Xor(a=xor16,b=carryin[15],out=SUM[15]);
+  }

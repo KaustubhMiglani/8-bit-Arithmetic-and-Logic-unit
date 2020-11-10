@@ -1,0 +1,10 @@
+/*xor on 4-bit data*/
+CHIP Xorwith{
+    IN AorS,Y[4];
+    OUT newY[4];
+    PARTS:
+    Xor(a=Y[0],b=AorS,out=newY[0]);
+    Xor(a=Y[1],b=AorS,out=newY[1]);
+    Xor(a=Y[2],b=AorS,out=newY[2]);
+    Xor(a=Y[3],b=AorS,out=newY[3]);
+}
